@@ -93,7 +93,7 @@ class BipolarDiag(KnowledgeEngine):
     def cyclopathic(self):
         self.declare(Fact(disease = "Cyclothymic Bipolar"))
 
-    @Rule(Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (depressive_intensity = 'yes'))
+    @Rule(Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (depressive_intensity = 'yes'), salience = -5)
     def depression(self):
         self.declare(Fact(disease = "Chronic Depression"))
 
@@ -115,7 +115,7 @@ class BipolarDiag(KnowledgeEngine):
 ===========================
 ===========================
 ===========================
-[Disclaimer: This is just a preliminary diagnosis and in no way is the most comprehensive.\n
+[Disclaimer: This is just a preliminary diagnosis and in no way is the most comprehensive.
 If your problem persists, do check to your local therapist for more comprehensive test result]\n""")
         if (disease == 'none'):
             print ('RESULT:Most likely ur fine!\n')
