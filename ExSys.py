@@ -93,9 +93,10 @@ class BipolarDiag(KnowledgeEngine):
     def cyclopathic(self):
         self.declare(Fact(disease = "Cyclothymic Bipolar"))
 
-    @Rule(Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (depressive_intensity = 'yes'), salience = -5)
-    def depression(self):
-        self.declare(Fact(disease = "Chronic Depression"))
+    
+    @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (manic_0 = 'yes'), Fact (depressive_0 = 'yes'), salience = 2)
+    def unspecified(self):
+        self.declare(Fact (disease = 'Unspecified Bipolar'))
 
     @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), salience = -10)
     def healthy(self):
@@ -118,7 +119,7 @@ class BipolarDiag(KnowledgeEngine):
 [Disclaimer: This is just a preliminary diagnosis and in no way is the most comprehensive.
 If your problem persists, do check to your local therapist for more comprehensive test result]\n""")
         if (disease == 'none'):
-            print ('RESULT:Most likely ur fine!\n')
+            print ('RESULT: You may [not have a bipolar disorder]. This doesnt mean you dont have any other mental illness\n')
 
         else:
             print ('RESULT:You may have [' + disease + "]. Please check to your nearest therapist")
