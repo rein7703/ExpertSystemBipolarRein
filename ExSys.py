@@ -1,3 +1,4 @@
+from unicodedata import name
 from experta import *
 import ast
 import sys
@@ -120,13 +121,14 @@ If your problem persists, do check to your local therapist for more comprehensiv
             print ('RESULT:Most likely ur fine!\n')
 
         else:
-            print ('RESULT:You may have ' + disease + ". Please check to your nearest therapist\n")
+            print ('RESULT:You may have ' + disease + ". Please check to your nearest therapist")
+        print("Hope you're well, " + self.username + "!\n")
 while true:
     if __name__ == "__main__":
         engine = BipolarDiag()
         engine.reset()
         engine.run()
-        #print('Printing engine facts after 1 run',engine.facts)
+        
 
 
 
