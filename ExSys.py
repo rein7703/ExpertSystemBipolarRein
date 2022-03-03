@@ -16,7 +16,7 @@ class BipolarDiag(KnowledgeEngine):
     def data_needed(self):
 
         yield Fact(diagBipolar = 'true')
-        print ("This system can help you self diagnose your bipolar symptoms. We will ask a few questions\n")
+        print ("This system can help you self diagnose your bipolar symptoms. We will ask a few questions")
 
 
     @Rule(Fact (diagBipolar = 'true'), NOT (Fact(name = W())), salience = 1000)
@@ -92,7 +92,11 @@ class BipolarDiag(KnowledgeEngine):
     def cyclopathic(self):
         self.declare(Fact(disease = "Cyclothymic Bipolar"))
 
-    @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), salience = -1)
+    @Rule(Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (depressive_intensity = 'yes'))
+    def depression(self):
+        self.declare(Fact(disease = "Chronic Depression"))
+
+    @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), salience = -10)
     def healthy(self):
         self.declare(Fact (disease = 'none'))
 
@@ -100,21 +104,23 @@ class BipolarDiag(KnowledgeEngine):
     @Rule (Fact (diagBipolar = 'true'), Fact(disease = MATCH.disease), salience = 1)
     def diagnose(self, disease):
         print ("""
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================
-        ===========================""")
+===========================
+===========================
+===========================
+===========================
+===========================
+===========================
+===========================
+===========================
+===========================
+===========================
+[Disclaimer: This is just a preliminary diagnosis and in no way is the most comprehensive.\n
+If your problem persists, do check to your local therapist for more comprehensive test result]\n""")
         if (disease == 'none'):
-            print ('Most likely ur fine!\n')
+            print ('RESULT:Most likely ur fine!\n')
 
         else:
-            print ('You have ' + disease + ". Please check to your nearest therapist\n")
+            print ('RESULT:You may have ' + disease + ". Please check to your nearest therapist\n")
 while true:
     if __name__ == "__main__":
         engine = BipolarDiag()
