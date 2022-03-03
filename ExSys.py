@@ -50,12 +50,12 @@ class BipolarDiag(KnowledgeEngine):
         is_valid(str(self.manic_weeks))
         self.declare(Fact(is_mania = self.manic_weeks))
 
-    @Rule (Fact (diagBipolar = 'true'), NOT(Fact(is_hypermania = W())), Fact(manic_intensity = 'no'), salience = 97)
+    @Rule (Fact (diagBipolar = 'true'), NOT(Fact(is_hypomania = W())), Fact(manic_intensity = 'no'), salience = 97)
     def ask_manic_days(self):
         self.manic_days = input('Does each episodes persisted for 4 days or more?' + "\n Write yes or no ->")
         self.manic_days = self.manic_days.strip().lower()
         is_valid(str(self.manic_days))
-        self.declare(Fact(is_hypermania = self.manic_days))
+        self.declare(Fact(is_hypomania = self.manic_days))
 
 
     @Rule (Fact (diagBipolar = 'true'), NOT(Fact(depressive_0 = W())), salience = 90)
@@ -85,7 +85,7 @@ class BipolarDiag(KnowledgeEngine):
     def bipolar_1(self):
         self.declare(Fact (disease = "Bipolar I"))
     
-    @Rule(Fact (diagBipolar = 'true'), Fact (is_hypermania = 'yes'), Fact(depressive_intensity = 'yes'))
+    @Rule(Fact (diagBipolar = 'true'), Fact (is_hypomania = 'yes'), Fact(depressive_intensity = 'yes'))
     def bipolar_2(self):
         self.declare(Fact(disease = "Bipolar II"))
     
