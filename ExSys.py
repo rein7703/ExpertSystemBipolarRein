@@ -121,7 +121,7 @@ If your problem persists, do check to your local therapist for more comprehensiv
             print ('RESULT:Most likely ur fine!\n')
 
         else:
-            print ('RESULT:You may have ' + disease + ". Please check to your nearest therapist")
+            print ('RESULT:You may have [' + disease + "]. Please check to your nearest therapist")
         print("Hope you're well, " + self.username + "!\n")
 while true:
     if __name__ == "__main__":
