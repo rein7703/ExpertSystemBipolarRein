@@ -1,6 +1,4 @@
-from unicodedata import name
 from experta import *
-import ast
 import sys
 from sympy import true
 
@@ -94,7 +92,7 @@ class BipolarDiag(KnowledgeEngine):
         self.declare(Fact(disease = "Cyclothymic Bipolar"))
 
     
-    @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (manic_0 = 'yes'), Fact (depressive_0 = 'yes'), salience = 2)
+    @Rule (Fact (diagBipolar = 'true'), NOT (Fact(disease = W())), Fact (manic_0 = 'yes'), Fact (depressive_0 = 'yes'), salience = -1)
     def unspecified(self):
         self.declare(Fact (disease = 'Unspecified Bipolar'))
 
@@ -106,16 +104,6 @@ class BipolarDiag(KnowledgeEngine):
     @Rule (Fact (diagBipolar = 'true'), Fact(disease = MATCH.disease), salience = 1)
     def diagnose(self, disease):
         print ("""
-===========================
-===========================
-===========================
-===========================
-===========================
-===========================
-===========================
-===========================
-===========================
-===========================
 [Disclaimer: This is just a preliminary diagnosis and in no way is the most comprehensive.
 If your problem persists, do check to your local therapist for more comprehensive test result]\n""")
         if (disease == 'none'):
